@@ -49,7 +49,7 @@ blockquote::before {
   width: 1.5em;
   height: 1.5em;
 
-  font-family: 'Fira Code';
+  font-family: 'Fira Code', monospace;
   font-weight: 700;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -155,7 +155,7 @@ pre[class*='language-'] {
   word-wrap: normal;
   color: #90a4ae;
   background: var(--pre-color);
-  font-family: 'Fira Code';
+  font-family: 'Fira Code', monospace;
   font-size: 0.8rem;
   line-height: 1.5em;
 
