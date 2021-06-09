@@ -176,8 +176,8 @@ content.innerHTML = marked(course0)
 const mode = document.querySelector('.btn-mode')
 mode.addEventListener('click', () => {
   const iconMap = {
-    0: '🦉',
-    1: '🐥',
+    0: '😺',
+    1: '🐶',
   }
   const textMap = ['dark', 'light']
   const colorPalette = {

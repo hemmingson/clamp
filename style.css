@@ -38,7 +38,7 @@ blockquote {
 }
 
 blockquote::before {
-  content: '🧑‍💻';
+  content: '🧔';
   position: absolute;
   left: -2em;
 }
