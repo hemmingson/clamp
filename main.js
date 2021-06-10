@@ -259,6 +259,53 @@ function add(a, b) { return a + b }
 console.log(arr.reduce(add)) // '012'
 console.log(arr.reduce(add, 'from ')) // 'from 012'
 \`\`\`
+
+## Synchronous, Async, Single-Threaded
+
+- JavaScript is a single-threaded, synchronous language
+- A function that takes a long time to run will cause a page to become unresponsive
+- JavaScript has function that act asynchronously
+- It can be both synchronous and asynchronous
+
+\`\`\`js
+function hang(secs) {
+  const doneAt = Date.now() + secs * 1000
+  while(Date.now() < doneAt) {}
+}
+hang(10) // stuck for 10s
+\`\`\`
+
+## Asynchronous JavaScript
+
+- Asynchronouse functions
+  - setTimeout()
+  - XMLHttpRequest(), jQuery.ajax(), fetch()
+  - Database calls
+- Execution stack
+  - Functions invoked by other functions get added to the call stack
+  - When functions complete, they are removed from the stack and the frame below continues executing
+- Browser APIs
+  - Functions that are not built into javascript, but might get run in the browser
+- Function queue
+- Event loop
+  - First checking is there anything in the stack
+  - If stack is empty, check is there anything in the queue that's ready to go onto the stack
+
+\`\`\`js
+function print(num) {
+  console.log(num)
+}
+// result: 2 1 0
+setTimeout(function () { print(0) }, 2000)
+setTimeout(function () { print(1) }, 0)
+print(2)
+\`\`\`
+
+## Callbacks
+
+- Control flow with asynchronous calls
+- Execute function once asynchronous call returns value
+  - Program doesn't have to halt and wait for value
 `
 
 const content = document.getElementById('content')
