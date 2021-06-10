@@ -162,11 +162,102 @@ window.y // undefined
 
 ## Closures
 
-- Functions that refer to variables declared by parent function
+- Functions that refer to variables declared by parent function still have access to those variables
 - Possible because of scoping
 
 \`\`\`js
+// closure weired thing
+function makeArray() {
+  const arr = []
 
+  for (var i = 0; i < 5; i++) {
+    arr.push(function () {
+      console.log(i)
+    })
+  }
+
+  console.log(i) // 5
+  return arr
+}
+const arr = makeArray()
+arr[0]() // 5
+
+function makeHelloFunction() {
+  const message = 'Hello!'
+
+  function sayHello() {
+    console.log(message)
+  }
+
+  return sayHello
+}
+// console.log(message) // error!
+console.log('typeof message:', typeof message) // typeof message: undefined
+const sayHello = makeHelloFunction()
+console.log(sayHello.toString())
+sayHello() // Hello!
+\`\`\`
+
+## IIFE (Immediately Invoked Function Expression)
+
+- A function expression that gets invoked immediately
+- Creates closure
+- Doesn't add to or modify global object
+
+\`\`\`js
+// create same closure without actually creating a globally scoped function is an IIFE
+const sayHello = (function () {
+  const message = 'Hello!'
+
+  function sayHello() {
+    console.log(message)
+  }
+
+  return sayHello
+})()
+sayHello() // Hello!
+
+// use case
+const counter = (function () {
+  let count = 0 // can't access count variable
+
+  return {
+    inc: function () { count += 1 },
+    get: function () { console.log(count) }
+  }
+})()
+
+// use IIFE to solve buggy
+function makeArray() {
+  const arr = []
+
+  for (var i = 0; i < 5; i++) {
+    arr.push((function (x) {
+      return function () { console.log(x) }
+    })(i))
+  }
+
+  return arr
+}
+const arr = makeArray()
+arr[0]() // 0
+\`\`\`
+
+## First-Class Functions
+
+- Functions are treated the same way as other value
+  - Can be assigned to variables, array values, obejct values
+  - Can be passed as arguments to other functions
+  - Can be returned from functions
+- Allows for the creation of higher-order functions
+  - Either takes one or more functions as arguments or returns a function
+  - map(), filter(), reduce()
+
+\`\`\`js
+const arr = ['0', 1, 2]
+function add(a, b) { return a + b }
+console.log(arr.reduce(add)) // '012'
+console.log(arr.reduce(add, 'from ')) // 'from 012'
 \`\`\`
 `
 
