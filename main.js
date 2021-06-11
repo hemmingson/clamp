@@ -1,4 +1,4 @@
-const course0 = `
+const course = `
 # CS50 React Native
 
 > Jordan Hayashi, 2018
@@ -306,10 +306,98 @@ print(2)
 - Control flow with asynchronous calls
 - Execute function once asynchronous call returns value
   - Program doesn't have to halt and wait for value
+
+## Promises
+
+- Alleviate "callback hell"
+- Allows you to write code that assumes a value is returned within a success function
+- Only needs a single error handler
+
+\`\`\`js
+const url = ''
+fetch(url) // returns a promise
+  .then(function (res) {
+    return res.json() // extract the json out of this result
+  })
+  .then(function (json) {
+    return {
+      importantData: json.importantData,
+    }
+  })
+  .then(function (data) {
+    console.log(data)
+  })
+  .catch(function (err) {
+    // handle error here
+  })
+\`\`\`
+
+## Async/Await
+
+- Introduced in ES2017
+- Allows people to write async code as if it were synchronous
+- Mostly inside try-catch block
+
+## this
+
+- Refers to an object that's set at the creation of a new execution context(function invocation)
+- In the global execution contect, refers to global object
+- If the function is called as a method of an object, 'this' is bound to the object the method is called on
+  - It's kind of a way of using a value that we don't yet know what it's going to be until we go ahead and invoke that function
+
+\`\`\`js
+// node REPL
+this // global object
+// chrome console
+this // window object
+
+const person = {
+  name: 'hem',
+  greet: function () {
+    console.log(this.name)
+  },
+}
+person.greet() // 'hem'
+const greet = person.greet
+greet() // undefined
+const friend = {
+  name: 'david',
+}
+friend.greet = person.greet
+friend.greet() // 'david'
+\`\`\`
+
+## Setting 'this' manually
+
+- bind(), call(), apply()
+  - Difference between bind and call and apply is that call and apply rather than returning a new function, call and apply will IIFE
+- ES6 arrow notation
+  - Will actually bind 'this' to be whatever 'this' is at the time that function is declared, rather than at the time that function is invoked
+
+\`\`\`js
+const person = {
+  name: 'hem',
+  greet: function () {
+    console.log(this.name)
+  },
+}
+const greet = person.greet.bind({ name: 'bound object' }) // explicitly bound this in this particular function to be this particular object
+greet() // 'bound object'
+// person.greet.call({ name: 'bound object' })
+// person.greet.apply({ name: 'bound object' })
+\`\`\`
+
+## Browsers and the DOM
+
+- Browsers render HTML to a webpage
+- HTML: defines a tree-like structure
+- Browsers construct this tree in memory before painting the page
+- Tree is called the Document Object Model
+- The DOM can be modified using JavaScript
 `
 
 const content = document.getElementById('content')
-content.innerHTML = marked(course0)
+content.innerHTML = marked(course)
 
 const mode = document.querySelector('.btn-mode')
 mode.addEventListener('click', () => {
