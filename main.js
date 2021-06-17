@@ -394,6 +394,85 @@ greet() // 'bound object'
 - Browsers construct this tree in memory before painting the page
 - Tree is called the Document Object Model
 - The DOM can be modified using JavaScript
+
+## Classes
+
+- Syntax introduced in ES6
+- Simplifies the definition of complex objects with their own prototypes
+- Classes vs instances
+- Methods vs static methods vs properties
+- new, constructor, extends, super
+  - constructor method in order to go ahead and construct an instance of this class
+
+\`\`\`js
+class MySet extends Set {
+  constructor(arr = []) {
+    super(arr) // run original set's constructor
+    this.originalArray = arr
+  }
+
+  add(val) {
+    super.add(val) // super refers to the class is extended
+    console.log('added ' + val + ' to the set!')
+  }
+
+  toArray() {
+    return Array.from(this) // pass in entire instance
+  }
+
+  reset() {
+    return new MySet(this.originalArray)
+  }
+}
+\`\`\`
+
+## React
+
+- Allows us to write declarative views that __react__ to change data automatically
+- Allows us to abstract complex problems into small components
+- Allows us to write simple code that is still performant
+
+## Imperative vs Declarative
+
+- How vs What
+  - How you do something and actually what you want out of it
+- Imperative programming outlines a series of steps to get to what you want
+- Declarative programming just declares what you want
+
+## React is Declarative
+
+- Imperative vs Declarative
+- The browser APIs aren't fun to work with
+- React allows us to write what we want, and the library will take care of the DOM manipulation
+
+## React is Easily Componentized
+
+- Breaking a complex problem into discrete components
+- Can reuse these components
+  - Consistency
+  - Iteration speed
+- React's declarative nature makes it easy to customize components
+
+## React is Performant
+
+- We write what we want and React will do the hard work
+- Reconciliation - the process by which React syncs changes in app state to the DOM
+  - Reconstructs the virtual DOM
+  - Diffs the virtual DOM against the real DOM
+
+## Writing React
+
+- JSX
+  - XML-like syntax extension of JavaScript
+  - Transpiles to JavaScript
+  - Lowercase tags are treated as HTML/SVG tags, uppercase are treated as custom components
+- Components are just functions
+  - Returns a node (something React can render, e.g. a \\<div \\/\\>)
+  - Receives an object of the properties that are passed to the element
+- Props
+  - Passed as an object to a component and used to compute the returned node
+  - Changes in these props will cause a recomputation of the returned node ("re-render")
+  - Unlike in HTML, these can be any JS value
 `
 
 const content = document.getElementById('content')
