@@ -473,6 +473,46 @@ class MySet extends Set {
   - Passed as an object to a component and used to compute the returned node
   - Changes in these props will cause a recomputation of the returned node ("re-render")
   - Unlike in HTML, these can be any JS value
+- State
+  - Adds internally-managed configuration for a component
+  - "this.state" is a class property on the component instance
+  - Can only be updated by invoking "this.setState()"
+    - Implemented in React.Component
+    - setState() calls are batched and run asynchronously
+    - Pass an object to be merged, or a function of previous state
+
+\`\`\`js
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      count: 0
+    }
+    // this.increaseCount = () => this.setState({count: this.state.count + 1})
+  }
+
+  increaseCount() {
+    // merge {count: 0}, {count: this.state.count + 1}, {count: this.state.count + 1}
+    // this.setState({count: this.state.count + 1})
+    // this.setState({count: this.state.count + 1})
+    // console.log(this.state.count) // 0
+
+    this.setState(prevState => ({count: prevState.count + 1})) // updater function
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>{this.props.count}</h2>
+        <button onClick={this.increaseCount.bind(this)}>Increase</button>
+      </div>
+    )
+  }
+}
+
+let count = 0
+setInterval(function() { render(<App count={count++} />, document.getElementById('root')) }, 1000)
+\`\`\`
 `
 
 const content = document.getElementById('content')
