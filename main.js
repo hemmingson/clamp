@@ -518,39 +518,51 @@ setInterval(function() { render(<App count={count++} />, document.getElementById
 const content = document.getElementById('content')
 content.innerHTML = marked(course)
 
+const root = document.documentElement
 const mode = document.querySelector('.btn-mode')
-mode.addEventListener('click', () => {
-  const iconMap = {
-    0: '😺',
-    1: '🐶',
-  }
-  const textMap = ['dark', 'light']
-  const colorPalette = {
-    0: ['#30475e', '#ececec', '#00203f', '#f2a365'],
-    1: ['#f9fcfb', '#333333', '#f3f9fb', '#2978b5'],
-  }
 
+const iconMap = {
+  0: '😺',
+  1: '🐶',
+}
+const textMap = ['dark', 'light']
+const colorPalette = {
+  0: ['#30475e', '#ececec', '#00203f', '#f2a365'],
+  1: ['#f9fcfb', '#333333', '#f3f9fb', '#2978b5'],
+}
+
+const darken = () => {
+  root.style.setProperty('--background-color', '#30475e')
+  root.style.setProperty('--font-color', '#ececec')
+  root.style.setProperty('--pre-color', '#00203f')
+  root.style.setProperty('--primary-color', '#f2a365')
+}
+const lighten = () => {
+  root.style.setProperty('--background-color', '#f9fcfb')
+  root.style.setProperty('--font-color', '#333333')
+  root.style.setProperty('--pre-color', '#f3f9fb')
+  root.style.setProperty('--primary-color', '#2978b5')
+}
+
+const isDark = window.localStorage.getItem('mode')
+  ? window.localStorage.getItem('mode') === 'dark'
+  : window.matchMedia('(prefers-color-scheme: dark)').matches
+
+mode.dataset.mode = isDark ? 'dark' : 'light'
+mode.textContent = isDark ? '🐶' : '😺'
+isDark ? darken() : lighten()
+
+mode.addEventListener('click', () => {
   const cur = textMap.findIndex((ele) => ele === mode.dataset.mode)
   mode.textContent = iconMap[cur]
+
   const tmp = 1 - cur
   mode.dataset.mode = textMap[tmp]
+  window.localStorage.setItem('mode', textMap[tmp])
 
-  document.documentElement.style.setProperty(
-    '--background-color',
-    colorPalette[tmp][0]
-  )
-  document.documentElement.style.setProperty(
-    '--font-color',
-    colorPalette[tmp][1]
-  )
-  document.documentElement.style.setProperty(
-    '--pre-color',
-    colorPalette[tmp][2]
-  )
-  document.documentElement.style.setProperty(
-    '--primary-color',
-    colorPalette[tmp][3]
-  )
+  if (textMap[tmp] === 'dark') {
+    darken()
+  } else lighten()
 })
 
 const toc = document.querySelector('ol')
