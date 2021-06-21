@@ -513,6 +513,65 @@ class App extends React.Component {
 let count = 0
 setInterval(function() { render(<App count={count++} />, document.getElementById('root')) }, 1000)
 \`\`\`
+
+## React Native
+
+- A framework that relies on React core
+- Allows us build mobile apps using only JavaScript
+  - "Learn once, write everywhere"
+- Supports iOS and Android
+
+## How does React Native work?
+
+- JavaScript is bundled
+  - Transpiled and minified
+- Separate threads for UI, layout and JavaScript
+- Communicate asynchronously through a "bridge"
+  - JS thread will request UI elements to be shown
+  - JS thread can be blocked and UI will still work
+
+## Differences between RN and Web
+
+- Base components
+- Style
+- No browser APIs
+  - CSS animations, Canvas, SVG, etc.
+  - Some have been polyfilled (fetch, timers, console, etc.)
+- Navigation
+
+## React Native Components
+
+- Not globally in scope like React web components
+  - import from "react-native"
+- div -> View
+- span -> Text
+  - All text must be wrapped by a <Text /> tag
+- button -> Button
+  - Touch handler use onPress instead of onClick
+- ScrollView
+
+## Style
+
+- React Native uses JS objects for styling
+- Object keys are based on CSS properties
+- Flexbox layout
+  - Default to column layout
+- Lengths are in unitless numbers
+- "style" prop can take an array of styles
+- StyleSheet.create()
+  - Functionally the same as creating objects for style
+  - Additional optimization: only sends IDs over the bridge
+  - Every time rendered just use object reference outside the component
+
+## Event Handling
+
+- Unlike web, not every component has every interaction
+- Only a few "touchable" components
+  - Button
+  - TouchableOpacity, TouchableHighlight, TouchableWithoutFeedback
+  - TouchableNativeFeedback (Android only)
+- Web handlers will receive the event as an argument, but React Native handlers often receive different arguments
+  - Consult the docs
 `
 
 const content = document.getElementById('content')
