@@ -24,7 +24,7 @@ But may differ for anything not defined by the standard.
 ## Types
 
 - Dynamic typing
-- Primitive types(no methods, immutoc)
+- Primitive types(no methods, immutable)
   - undefined
   - null
   - boolean
@@ -118,7 +118,7 @@ num instanceof Number // false
 
 - Variable lifetime(how long these variables actually exist)
   - Lexical scoping(var): from when they're declared until when their function ends
-  - Block scoping(let, const): util the next } is reached
+  - Block scoping(let, const): until the next } is reached
 - Hoisting
   - Function definitions are hoisted, but not lexically-scoped initializations
 
@@ -166,7 +166,7 @@ window.y // undefined
 - Possible because of scoping
 
 \`\`\`js
-// closure weired thing
+// closure weird thing
 function makeArray() {
   const arr = []
 
@@ -246,7 +246,7 @@ arr[0]() // 0
 ## First-Class Functions
 
 - Functions are treated the same way as other value
-  - Can be assigned to variables, array values, obejct values
+  - Can be assigned to variables, array values, object values
   - Can be passed as arguments to other functions
   - Can be returned from functions
 - Allows for the creation of higher-order functions
@@ -277,7 +277,7 @@ hang(10) // stuck for 10s
 
 ## Asynchronous JavaScript
 
-- Asynchronouse functions
+- Asynchronous functions
   - setTimeout()
   - XMLHttpRequest(), jQuery.ajax(), fetch()
   - Database calls
@@ -341,7 +341,7 @@ fetch(url) // returns a promise
 ## this
 
 - Refers to an object that's set at the creation of a new execution context(function invocation)
-- In the global execution contect, refers to global object
+- In the global execution context, refers to global object
 - If the function is called as a method of an object, 'this' is bound to the object the method is called on
   - It's kind of a way of using a value that we don't yet know what it's going to be until we go ahead and invoke that function
 
