@@ -572,6 +572,61 @@ setInterval(function() { render(<App count={count++} />, document.getElementById
   - TouchableNativeFeedback (Android only)
 - Web handlers will receive the event as an argument, but React Native handlers often receive different arguments
   - Consult the docs
+
+## Components
+
+- Return a node (something that can be rendered)
+- Represent a discrete piece of UI
+- "All React components must act like pure functions with respect to their props"
+- Two types:
+  - Stateless Functional Component (SFC) a.k.a. Pure Functional Component
+  - React.Component
+
+## Stateless Functional Component (SFC)
+
+- Simplest component: use when you don't need state
+- A function that takes props and returns a node
+  - Should be "pure" (It should not have any side effects like setting values, updating arrays, etc.)
+- Any change in props will cause the function to be re-invoked
+
+## React.Component
+
+- An abstract class that can be extended to behave however you what
+- These have additional features that SFCs don't
+  - Have instances
+  - Maintain their own state
+  - Have lifecycle methods (similar to hooks or event handlers) that are automatically invoked
+- Rendering now becomes a function of props and class properties
+
+## Mount
+
+- constructor(props)
+  - Initialize state or other class properties (bound methods, etc.)
+- render()
+  - The meat of a component
+  - Return a node
+- componentDidMount()
+  - Do anything that isn't needed for UI (async actions, etc.)
+  - Setting state here will cause a re-render before updating the UI
+
+## Update
+
+- componentWillReceiveProps(nextProps)
+  - Update any state fields that rely on props
+- shouldComponentUpdate(nextProps, nextState)
+  - Compare changed values, return true if the component should rerender
+    - If return false, the update cycle terminates
+- render()
+- componentDidUpdate(prevProps, prevState)
+  - Do anything that isn't needed for UI (network requests, etc.)
+
+## Unmount
+
+- componentWillUnmount()
+  - Clean up
+    - Remove event listeners
+    - Invalidate network requests
+    - Clear timeouts/intervals
 `
 
 const content = document.getElementById('content')
