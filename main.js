@@ -627,6 +627,74 @@ setInterval(function() { render(<App count={count++} />, document.getElementById
     - Remove event listeners
     - Invalidate network requests
     - Clear timeouts/intervals
+
+## Expo
+
+- "The fastest way to build an app"
+- Suite of tools to accelerate the React Native development process
+  - Snack - runs React Native in the browser
+  - XDE - a GUI to serve, share, and publish your Expo projects
+  - CLI - a command-line interface to serve, share and publish projects
+  - Client - runs your projects on your phone while developing
+  - SDK - bundles and exposes cross-platform libraries and APIs
+
+## Import/Export
+
+- Components are great for simplifying code
+- We can split components into their own files
+  - Helps organize project
+  - Export the component from the file
+- Import the component before using it in a file
+- Default vs named import/export
+
+\`\`\`js
+// Count.js
+export default Count // default export limit only 1
+export const Count = props => {}
+export default props => {}
+export const num = 0
+
+// App.js
+import CustomCount, { num } from './Count.js'
+import { Count, num } from './Count.js'
+
+// syntax
+import * as name from ""
+import defaultExport, { export1, export2 as alias2 } from ""
+
+// dynamic import
+(async () => {
+  if(flag) const { default: myDefault } = await import('')
+}) // need to destruct and rename default key
+import('').then(module => {})
+let module = await import('')
+\`\`\`
+
+## PropTypes
+
+- React can validate the types of component props at runtime
+- Development tool that allows developers to ensure they're passing correct props
+- Helps document your component's APIs
+- Only runs in development mode
+
+\`\`\`js
+import PropTypes from 'prop-types'
+
+// for functional component
+Count.propTypes = {
+  count: PropTypes.number.isRequired
+} // outside function
+
+// for class component better way
+static propTypes = {} // inside class
+\`\`\`
+
+## How to Read Docs
+
+- Have a goal in mind
+- See what the library/framework/API offers
+- Find something that solves your problem
+- Configure using the exposed API
 `
 
 const content = document.getElementById('content')
