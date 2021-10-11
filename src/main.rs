@@ -1,5 +1,6 @@
 use rand::Rng;
 // [🧑‍🏫] import { io } from 'std'
+use std::cmp::Ordering;
 use std::io;
 
 // !🦀
@@ -15,6 +16,14 @@ fn main() {
     // '&'means refrence
     io::stdin().read_line(&mut crab).expect("utf-8");
 
+    let crab: u32 = crab.trim().parse().expect("number"); // shadowing
+
+    match crab.cmp(&secret_number) {
+        Ordering::Less => println!("older"),
+        Ordering::Equal => println!(" "),
+        Ordering::Greater => println!("younger"),
+    }
+
     // [🧑‍🏫] console.log('%s', crab)
-    println!("crab is {}. >{}", secret_number, crab);
+    println!("crab is {}.", secret_number);
 }
